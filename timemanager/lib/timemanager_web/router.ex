@@ -14,6 +14,7 @@ defmodule TimeManagerWeb.Router do
     pipe_through :json_api
 
     get "/users", UserController, :show
+    get "/users/all", UserController, :show_all
     get "/users/:id", UserController, :show
     get "/users/teams/:teamId", UserController, :show
     post "/users", UserController, :create

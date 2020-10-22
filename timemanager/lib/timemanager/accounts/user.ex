@@ -14,7 +14,7 @@ defmodule TimeManager.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :email, :role_id, :team_id])
-    |> validate_required([:username, :email, :role_id, :team_id])
+    |> validate_required([:username, :email, :role_id])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint([:username, :email])
   end
