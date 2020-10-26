@@ -26,7 +26,7 @@ services:
       - db
   db:
     # We use the predefined Postgres image
-    image: postgres:9.6
+    image: postgres:13.0
     environment:
       # Set user/password for Postgres
       POSTGRES_USER: postgres

@@ -9,17 +9,20 @@ do
   echo "$(date) - waiting for database to start"
   sleep 2
 done
-exec mix run script_user.sql
-# Create, migrate, and seed database if it doesn't exist.
-if [[ -z `psql -Atqc "\\list $PGDATABASE"` ]]; then
-  echo "Database $PGDATABASE does not exist. Creating..."
-  createdb -E UTF8 $PGDATABASE -l en_US.UTF-8 -T template0
-  mix ecto.migrate
-  mix run priv/repo/seeds/roles_seeds.exs
-  mix run priv/repo/seeds/users_seeds.exs
-  mix run priv/repo/seeds/clocks_seeds.exs
-  mix run priv/repo/seeds/workingtimes_seeds.exs
-  echo "Database $PGDATABASE created."
-fi
 
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    CREATE DATABASE timemanager_database
+    GRANT ALL PRIVILEGES ON DATABASE timemanager_database TO postgres;
+EOSQL
+
+
+# Create, migrate, and seed database if it doesn't exist.
+
+exec mix ecto.migrate
+exec mix run priv/repo/seeds/roles_seeds.exs
+exec mix run priv/repo/seeds/users_seeds.exs
+exec mix run priv/repo/seeds/clocks_seeds.exs
+exec mix run priv/repo/seeds/workingtimes_seeds.exs
 exec mix phx.server
