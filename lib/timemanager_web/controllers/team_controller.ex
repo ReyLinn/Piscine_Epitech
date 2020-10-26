@@ -2,7 +2,6 @@ defmodule TimeManagerWeb.TeamController do
   use TimeManagerWeb, :controller
 
   alias TimeManager.Accounts
-  alias TimeManager.Accounts.Team
 
   action_fallback TimeManagerWeb.FallbackController
 
