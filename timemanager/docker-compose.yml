@@ -14,7 +14,7 @@ services:
       # Variables to connect to our Postgres server
       PGUSER: postgres
       PGPASSWORD: postgres
-      PGDATABASE: database_name
+      PGDATABASE: timemanager-database
       PGPORT: 5432
       # Hostname of our Postgres container
       PGHOST: db
