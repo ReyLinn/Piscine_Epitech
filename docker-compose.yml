@@ -36,7 +36,6 @@ services:
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./script_user.sql
 # Define the volumes
 volumes:
   pgdata:
