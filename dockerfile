@@ -10,11 +10,20 @@ RUN mkdir /app
 COPY . /app
 WORKDIR /app
 
+
+
 # Install hex package manager
 RUN mix do local.hex --force, local.rebar --force
+
+# install mix dependencies
+COPY mix.exs mix.lock ./
+COPY config config
 RUN mix deps.get
-RUN mix ecto.reset
-# Compile the project
-RUN mix do compile
+RUN mix deps.compile
+
+# build project
+COPY priv priv
+COPY lib lib
+RUN mix compile
 
 CMD ["/app/entrypoint.sh"]

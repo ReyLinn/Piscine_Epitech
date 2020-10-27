@@ -2,8 +2,6 @@ defmodule TimeManager.Time.Clock do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "clocks" do
     field :time, :utc_datetime
     field :status, :boolean, default: false
