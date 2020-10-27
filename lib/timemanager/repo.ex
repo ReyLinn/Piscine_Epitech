@@ -9,7 +9,7 @@ defmodule TimeManager.Repo do
         |> Keyword.put(:password, System.get_env("PGPASSWORD"))
         |> Keyword.put(:database, System.get_env("PGDATABASE"))
         |> Keyword.put(:hostname, System.get_env("PGHOST"))
-        |> Keyword.put(:port, System.get_env("PGPORT") |> String.to_integer)
+        |> Keyword.put(:port, (System.get_env("PGPORT") || "5432") |> String.to_integer)
       {:ok, config}
     end
 end
