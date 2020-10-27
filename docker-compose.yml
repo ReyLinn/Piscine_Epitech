@@ -15,7 +15,7 @@ services:
       PGUSER: postgres
       PGPASSWORD: postgres
       PGDATABASE: timemanager_database
-      PGPORT: '5432'
+      PGPORT: 5432
       # Hostname of our Postgres container
       PGHOST: db
     ports:
