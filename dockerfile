@@ -1,6 +1,3 @@
-FROM postgres:13.0
-
-COPY ./init-user-db.sh /docker-entrypoint-initdb.d/init-user-db.sh
 
 # Use an official Elixir runtime as a parent image
 FROM elixir:latest
