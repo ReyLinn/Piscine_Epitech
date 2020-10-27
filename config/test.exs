@@ -10,6 +10,7 @@ config :timemanager, TimeManager.Repo,
   password: "postgres",
   database: "timemanager_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
