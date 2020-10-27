@@ -13,6 +13,7 @@ WORKDIR /app
 # Install hex package manager
 RUN mix do local.hex --force, local.rebar --force
 RUN mix deps.get
+RUN mix ecto.reset
 # Compile the project
 RUN mix do compile
 
