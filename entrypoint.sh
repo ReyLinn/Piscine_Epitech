@@ -11,7 +11,7 @@ do
 done
 
 # Create, migrate, and seed database if it doesn't exist.
-exec mix.create
+exec mix ecto.create
 exec mix ecto.migrate
 exec mix run priv/repo/seeds/roles_seeds.exs
 exec mix run priv/repo/seeds/users_seeds.exs
