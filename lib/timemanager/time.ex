@@ -3,7 +3,6 @@ defmodule TimeManager.Time do
   alias TimeManager.Repo
   alias TimeManager.Time.Clock
   alias TimeManager.Time.WorkingTime
-  alias TimeManager.Accounts.User
 
   @doc """
   Gets a single clock.
@@ -13,15 +12,6 @@ defmodule TimeManager.Time do
     query = from c in Clock,
     where: c.user_id == ^userId
     Repo.one!(query)
-  end
-  #inutilisé
-  def create_clock_custom(attrs \\ %{}) do
-    with {:ok, %User{} = user} <- attrs do
-      newClock = %{"time" => DateTime.truncate(DateTime.utc_now(), :second), "status" => false, "user_id" => user.id}
-      %Clock{}
-      |> Clock.changeset(newClock)
-      |> Repo.insert()
-    end
   end
 
   @doc """

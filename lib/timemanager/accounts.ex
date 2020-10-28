@@ -4,6 +4,7 @@ defmodule TimeManager.Accounts do
   alias TimeManager.Repo
   alias TimeManager.Accounts.User
   alias TimeManager.Accounts.Team
+  alias TimeManager.Accounts.Role
   alias TimeManager.Time
 
   def get_all_users() do
@@ -57,7 +58,13 @@ defmodule TimeManager.Accounts do
   def update_user(%User{} = user, attrs) do
     old_role_id = user.role_id
     new_role_id = Map.get(attrs, "role_id")
-    if old_role_id == 3  and new_role_id == 2 do
+    role_employee_id =
+      from(r in Role, where: r.name == ^"Employee", select: r.id)
+      |> Repo.one!
+    role_manager_id =
+      from(r in Role, where: r.name == ^"Manager", select: r.id)
+      |> Repo.one!
+    if old_role_id == role_employee_id  and new_role_id == role_manager_id do
       create_team(%{"manager_id" => user.id})
     end
     user
