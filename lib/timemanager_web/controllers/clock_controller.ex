@@ -20,4 +20,12 @@ defmodule TimeManagerWeb.ClockController do
       |> render("show.json", data: clock)
     end
   end
+
+  def update(conn, %{"userId" => userId, "clock" => clock_params}) do
+    clock = Time.get_clock_by_userId!(userId)
+
+    with {:ok, %Clock{} = clock} <- Time.update_clock(clock, clock_params) do
+      render(conn, "show.json", data: clock)
+    end
+  end
 end

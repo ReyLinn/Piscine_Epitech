@@ -38,6 +38,11 @@ defmodule TimeManager.Time do
     |> Repo.delete_all
   end
 
+  def update_clock(%Clock{} = clock, attrs) do
+    clock
+    |> Clock.changeset(attrs)
+    |> Repo.update()
+  end
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking clock changes.
   """

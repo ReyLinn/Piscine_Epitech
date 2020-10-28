@@ -28,7 +28,7 @@ defmodule TimeManagerWeb.Router do
     delete "/workingtimes/:workingTimeId", WorkingTimeController, :delete
 
     get "/clocks/:userId", ClockController, :show
-    post "/clocks/:userId", ClockController, :create
+    put "/clocks/:userId", ClockController, :update
 
     get "/teams", TeamController, :index
     get "/teams/:managerId", TeamController, :show
