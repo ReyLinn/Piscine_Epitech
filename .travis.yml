@@ -15,8 +15,9 @@ after_success:
   - docker push lucasboisbourdin/timemanager_phoenix
 
 deploy: 
-  skip_cleanup: true
   provider: elasticbeanstalk
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
   region: eu-west-3
   app: docker-timemanager
   env: DockerTimemanager-env
@@ -24,5 +25,4 @@ deploy:
   bucket_path: docker-timemanager
   on:
     branch: main
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  skip_cleanup: true
