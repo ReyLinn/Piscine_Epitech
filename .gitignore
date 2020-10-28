@@ -6,7 +6,5 @@
 erl_crash.dump
 *.ez
 *.beam
-*.bz2
-*.zip
 /config/*.secret.exs
 .elixir_ls/
