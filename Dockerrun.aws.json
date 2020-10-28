@@ -1,0 +1,62 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "timamanager",
+            "links" : [
+                "postgres-server"
+            ],
+            "image": "lucasboisbourdin/timemanager_phoenix",
+            "essential": false,
+            "portMappings": [
+                {
+                    "containerPort": 4000,
+                    "hostPort": 4000
+                }
+            ],
+            "environment": [
+                {
+                    "name": "PGUSER",
+                    "value": "postgres" 
+                },
+                {
+                    "name": "PGPASSWORD",
+                    "value": "postgres" 
+                },
+                {
+                    "name": "PGDATABASE",
+                    "value": "timemanager_database" 
+                },
+                {
+                    "name": "PGPORT",
+                    "value": 5432 
+                },
+                {
+                    "name": "PGHOST",
+                    "value": "db" 
+                }
+            ],
+            "memory": 500
+        },
+        {
+            "name": "postgres-server",
+            "image": "postgres:13.0",
+            "essential": true,
+            "environment": [
+                {
+                    "name": "POSTGRES_USER",
+                    "value": "postgres" 
+                },
+                {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "postgres" 
+                },
+                {
+                    "name": "PGDATA",
+                    "value": "/var/lib/postgresql/data/pgdata" 
+                }
+            ],
+            "memory": 500
+        }
+    ]
+}
