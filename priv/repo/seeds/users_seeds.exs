@@ -5,6 +5,7 @@ alias TimeManager.Accounts.Team
 Repo.insert! %User{
   username: "ADMIN",
   email: "admin@admin.com",
+  password: "admin",
   role_id: 1,
   team_id: nil
 }
@@ -16,6 +17,7 @@ Repo.insert! %Team{
 Repo.insert! %User{
   username: "username1",
   email: "email1@email.com",
+  password: "password",
   role_id: 2,
   team_id: nil
 }
@@ -27,6 +29,7 @@ Repo.insert! %Team{
 Repo.insert! %User{
   username: "username2",
   email: "email2@email.com",
+  password: "password",
   role_id: 3,
   team_id: 2
 }
@@ -37,6 +40,7 @@ Repo.insert! %Team{
 Repo.insert! %User{
   username: "username3",
   email: "email3@email.com",
+  password: "password",
   role_id: 3,
   team_id: 2
 }
@@ -48,6 +52,7 @@ Repo.insert! %Team{
 Repo.insert! %User{
   username: "username4",
   email: "email4@email.com",
+  password: "password",
   role_id: 4,
   team_id: 3
 }
@@ -55,6 +60,7 @@ Repo.insert! %User{
 Repo.insert! %User{
   username: "username5",
   email: "email5@email.com",
+  password: "password",
   role_id: 4,
   team_id: 3
 }
@@ -62,6 +68,7 @@ Repo.insert! %User{
 Repo.insert! %User{
   username: "username6",
   email: "email6@email.com",
+  password: "password",
   role_id: 4,
   team_id: 4
 }
@@ -69,6 +76,7 @@ Repo.insert! %User{
 Repo.insert! %User{
   username: "username7",
   email: "email7@email.com",
+  password: "password",
   role_id: 4,
   team_id: 4
 }
