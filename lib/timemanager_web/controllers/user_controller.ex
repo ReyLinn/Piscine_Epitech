@@ -32,6 +32,7 @@ defmodule TimeManagerWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
+    user_params = Map.put(user_params, "role_id", 4)
     with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       clock_params = %{"time" => DateTime.truncate(DateTime.utc_now(), :second), "status" => false, "user_id" => user.id}
       Time.create_clock(clock_params)
@@ -55,6 +56,25 @@ defmodule TimeManagerWeb.UserController do
 
     with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def login(conn, %{"email" => email, "password" => password}) do
+    case TimeManager.Accounts.authenticate_user(email, password) do
+      {:ok, user} ->
+        conn
+        |> put_session(:current_user_id, user.id)
+        |> configure_session(renew: true)
+        |> put_status(:ok)
+        |> put_view(TimeManagerWeb.UserView)
+        |> render("show.json", data: user)
+
+      {:error, message} ->
+        conn
+        |> delete_session(:current_user_id)
+        |> put_status(:unauthorized)
+        |> put_view(TimeManagerWeb.ErrorView)
+        |> render("401.json", message: message)
     end
   end
 end

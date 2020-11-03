@@ -45,7 +45,8 @@ defmodule TimeManager.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ja_serializer, github: "vt-elixir/ja_serializer"},
       {:cowlib, "~> 2.8.0", override: true},
-      {:cowboy, "~> 2.7.0", override: true}
+      {:cowboy, "~> 2.7.0", override: true},
+      {:bcrypt_elixir, "~> 2.0"}
     ]
   end
 

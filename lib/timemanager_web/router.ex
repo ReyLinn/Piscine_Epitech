@@ -2,22 +2,30 @@ defmodule TimeManagerWeb.Router do
   use TimeManagerWeb, :router
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["json-api"]
+    plug :fetch_session
   end
 
-  pipeline :json_api do
+  pipeline :api_auth do
     plug :accepts, ["json-api"]
+    plug :ensure_authenticated
     plug JaSerializer.Deserializer
   end
 
   scope "/api", TimeManagerWeb do
-    pipe_through :json_api
+    pipe_through :api
+
+    post "/users/login", UserController, :login
+    post "/users", UserController, :create
+  end
+
+  scope "/api", TimeManagerWeb do
+    pipe_through [:api, :api_auth]
 
     get "/users", UserController, :show
     get "/users/all", UserController, :show_all
     get "/users/:id", UserController, :show
     get "/users/teams/:teamId", UserController, :show
-    post "/users", UserController, :create
     put "/users/:id", UserController, :update
     delete "/users/:id", UserController, :delete
 
@@ -32,6 +40,20 @@ defmodule TimeManagerWeb.Router do
 
     get "/teams", TeamController, :index
     get "/teams/:managerId", TeamController, :show
+  end
+
+  defp ensure_authenticated(conn, _opts) do
+    current_user_id = get_session(conn, :current_user_id)
+
+    if current_user_id do
+      conn
+    else
+      conn
+      |> put_status(:unauthorized)
+      |> put_view(TimeManagerWeb.ErrorView)
+      |> render("401.json", message: "Unauthenticated user")
+      |> halt()
+    end
   end
 
   # Enables LiveDashboard only for development
