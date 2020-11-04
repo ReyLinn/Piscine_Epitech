@@ -27,3 +27,5 @@ COPY lib lib
 RUN mix compile
 
 CMD ["/app/entrypoint.sh"]
+
+EXPOSE 4000
