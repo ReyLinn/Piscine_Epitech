@@ -8,9 +8,11 @@ services:
   - docker
     
 before_install:
-  - docker build -t lucasboisbourdin/timemanager_phoenix .
+  - docker-compose build
 
 after_success: 
+  - docker images
+  - docker tag piscine_epitech_phoenix lucasboisbourdin/timemanager_phoenix
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
   - docker push lucasboisbourdin/timemanager_phoenix
 
