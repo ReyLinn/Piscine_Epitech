@@ -36,7 +36,7 @@
                     "value": "db" 
                 }
             ],
-            "memory": 1000
+            "memory": 128
         },
         {
             "name": "postgres-server",
@@ -62,7 +62,7 @@
                     "value": "/var/lib/postgresql/data/pgdata" 
                 }
             ],
-            "memory": 1000
+            "memory": 128
         }
     ]
 }
