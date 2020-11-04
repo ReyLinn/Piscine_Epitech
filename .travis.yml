@@ -25,4 +25,4 @@ deploy:
   bucket_path: docker-timemanager
   on:
     branch: main
-  skip_cleanup: true
+  skip_cleanup: false
