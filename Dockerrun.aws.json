@@ -7,7 +7,7 @@
                 "postgres-server"
             ],
             "image": "lucasboisbourdin/timemanager_phoenix",
-            "essential": false,
+            "essential": true,
             "portMappings": [
                 {
                     "containerPort": 4000,
@@ -42,12 +42,6 @@
             "name": "postgres-server",
             "image": "postgres:13.0",
             "essential": true,
-            "portMappings": [
-                {
-                    "containerPort": 5432,
-                    "hostPort": 5432
-                }
-            ],
             "environment": [
                 {
                     "name": "POSTGRES_USER",
