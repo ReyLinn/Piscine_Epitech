@@ -13,6 +13,7 @@ before_install:
 after_success: 
   - docker images
   - docker tag piscine_epitech_phoenix lucasboisbourdin/timemanager_phoenix
+  - docker images
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
   - docker push lucasboisbourdin/timemanager_phoenix
 
