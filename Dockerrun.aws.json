@@ -11,7 +11,7 @@
             "portMappings": [
                 {
                     "containerPort": 4000,
-                    "hostPort": 80
+                    "hostPort": 4000
                 }
             ],
             "environment": [
@@ -36,7 +36,7 @@
                     "value": "db" 
                 }
             ],
-            "memory": 500
+            "memory": 1000
         },
         {
             "name": "postgres-server",
@@ -56,7 +56,7 @@
                     "value": "/var/lib/postgresql/data/pgdata" 
                 }
             ],
-            "memory": 500
+            "memory": 1000
         }
     ]
 }
