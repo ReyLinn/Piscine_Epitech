@@ -9,6 +9,7 @@ services:
     build:
       # Here we define that it should build from the current directory
       context: .
+    #image: lucasboisbourdin/timemanager_phoenix
     command: /bin/bash -c 'mix ecto.reset && mix phx.server'
     environment:
       # Variables to connect to our Postgres server
@@ -20,7 +21,7 @@ services:
       PGHOST: db
     ports:
       # Mapping the port to make the Phoenix app accessible outside of the container
-      - "80:4000"
+      - "443:4000"
     depends_on:
       # The db container needs to be started before we start this container
       - db
