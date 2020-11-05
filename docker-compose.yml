@@ -6,10 +6,10 @@ services:
   # Our Phoenix container
   phoenix:
     # The build parameters for this container.
-    # build:
-    #   # Here we define that it should build from the current directory
-    #   context: .
-    image: lucasboisbourdin/timemanager_phoenix
+    build:
+      # Here we define that it should build from the current directory
+      context: .
+    #image: lucasboisbourdin/timemanager_phoenix
     command: /bin/bash -c 'mix ecto.reset && mix phx.server'
     environment:
       # Variables to connect to our Postgres server
