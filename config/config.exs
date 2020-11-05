@@ -13,7 +13,7 @@ config :timemanager,
 
 # Configures the endpoint
 config :timemanager, TimeManagerWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "0.0.0.0"],
   secret_key_base: "UtC8tU9/LZQRlx8qpPWpRJxAAuaxc7bB246uY2Yz75n1kF+frWQYI/gjO7OiHo2f",
   render_errors: [view: TimeManagerWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: TimeManager.PubSub,
