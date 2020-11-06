@@ -18,7 +18,7 @@ after_success:
   - docker push lucasboisbourdin/timemanager_vuejs
 
 addons:
-  ssh_known_hosts: <deploy-host>
+  ssh_known_hosts: ec2-35-180-181-8.eu-west-3.compute.amazonaws.com
 
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
