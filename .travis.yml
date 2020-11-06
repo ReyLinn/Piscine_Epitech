@@ -11,10 +11,8 @@ before_install:
   - docker-compose build
 
 after_success: 
-  - docker images
   - docker tag piscine_epitech_phoenix lucasboisbourdin/timemanager_phoenix
   - docker tag piscine_epitech_vuejs lucasboisbourdin/timemanager_vuejs
-  - docker images
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
   - docker push lucasboisbourdin/timemanager_phoenix
   - docker push lucasboisbourdin/timemanager_vuejs
