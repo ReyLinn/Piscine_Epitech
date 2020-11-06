@@ -2,11 +2,13 @@ defmodule TimeManagerWeb.Router do
   use TimeManagerWeb, :router
 
   pipeline :api do
+    plug CORSPlug
     plug :accepts, ["json-api"]
     plug :fetch_session
   end
 
   pipeline :api_auth do
+    plug CORSPlug
     plug :accepts, ["json-api"]
     plug :ensure_authenticated
     plug JaSerializer.Deserializer
