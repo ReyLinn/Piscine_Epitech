@@ -4,9 +4,12 @@ elixir:
 otp_release:
 - '21.0'
 services:
-- docker
-addons:
-  ssh_known_hosts: ec2-35-180-181-8.eu-west-3.compute.amazonaws.com
+  - docker
+  addons:
+    ssh_known_hosts: ec2-35-180-181-8.eu-west-3.compute.amazonaws.com
+# before_install:
+# - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
+#   -in deploy_rsa.enc -out deploy_rsa -d
 after_success:
 - docker tag piscine_epitech_phoenix lucasboisbourdin/timemanager_phoenix
 - docker tag piscine_epitech_vuejs lucasboisbourdin/timemanager_vuejs
@@ -19,6 +22,3 @@ deploy:
   script: sudo mkdir travis
   on:
     branch: main
-before_install:
-- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
