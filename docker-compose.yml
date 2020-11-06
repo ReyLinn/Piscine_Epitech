@@ -4,7 +4,7 @@ services:
   vuejs:
     build:
       context: ./Front_TimeMachine_2020
-    #image: lucasboisbourdin/timemanager_phoenix
+    #image: lucasboisbourdin/timemanager_vuejs
     command: /bin/bash -c 'npm run serve'
     ports:
       - "8080:8080"

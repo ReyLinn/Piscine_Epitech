@@ -17,15 +17,18 @@ after_success:
   - docker push lucasboisbourdin/timemanager_phoenix
   - docker push lucasboisbourdin/timemanager_vuejs
 
-# deploy: 
-#   provider: elasticbeanstalk
-#   access_key_id: "$AWS_ACCESS_KEY"
-#   secret_access_key: "$AWS_SECRET_KEY"
-#   region: eu-west-3
-#   app: docker-timemanager
-#   env: DockerTimemanager-env
-#   bucket_name: elasticbeanstalk-eu-west-3-840193320740
-#   bucket_path: docker-timemanager
-#   on:
-#     branch: main
-#   skip_cleanup: false
+addons:
+  ssh_known_hosts: <deploy-host>
+
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: sudo mkdir travis
+  on:
+    branch: main
