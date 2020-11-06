@@ -1,0 +1,23 @@
+language: elixir
+elixir:
+- 1.11.1
+otp_release:
+- '21.0'
+services:
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
+- docker-compose build
+after_success:
+- docker tag piscine_epitech_phoenix lucasboisbourdin/timemanager_phoenix
+- docker tag piscine_epitech_vuejs lucasboisbourdin/timemanager_vuejs
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
+- docker push lucasboisbourdin/timemanager_phoenix
+- docker push lucasboisbourdin/timemanager_vuejs
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: sudo mkdir travis
+  on:
+    branch: main
