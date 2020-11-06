@@ -1,43 +1,40 @@
-# Version of docker-compose
 version: '3'
 
-# Containers we are going to run
 services:
-  # Our Phoenix container
-  phoenix:
-    # The build parameters for this container.
+  vuejs:
     build:
-      # Here we define that it should build from the current directory
+      context: ./Front_TimeMachine_2020
+    #image: lucasboisbourdin/timemanager_phoenix
+    command: /bin/bash -c 'npm run serve'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - phoenix
+
+  phoenix:
+    build:
       context: .
     #image: lucasboisbourdin/timemanager_phoenix
     command: /bin/bash -c 'mix ecto.reset && mix phx.server'
     environment:
-      # Variables to connect to our Postgres server
       PGUSER: postgres
       PGPASSWORD: postgres
       PGDATABASE: timemanager_database
       PGPORT: 5432
-      # Hostname of our Postgres container
       PGHOST: db
     ports:
-      # Mapping the port to make the Phoenix app accessible outside of the container
-      - "80:4000"
-      - "443:4001"
+      - "4001:4001"
     depends_on:
-      # The db container needs to be started before we start this container
       - db
+
   db:
-    # We use the predefined Postgres image
     image: postgres:13.0
     environment:
-      # Set user/password for Postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      # Set a path where Postgres should store the data
       PGDATA: /var/lib/postgresql/data/pgdata
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
-# Define the volumes
 volumes:
   pgdata:
